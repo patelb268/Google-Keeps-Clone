@@ -4,6 +4,12 @@ import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 
 function Note(props) {
   
+  const noteRef = useRef();
+  const [isEditing, setEditing] = useState(false);
+  const [editedNote, setEditedNote] = useState({
+    title: props.title,
+    content: props.content
+  });
   const contentRef = useRef(null);
 
   function handleClick() {
@@ -26,6 +32,29 @@ function Note(props) {
     props.onEdit(props.id, editedNote);
     setEditing(false);
   }
+
+  function adjustTextareaHeight() {
+    if (contentRef.current) {
+      const textarea = contentRef.current;
+      textarea.style.height = "auto";
+      textarea.style.height = textarea.scrollHeight + "px";
+      textarea.style.overflowY = "hidden";
+    }
+  }
+
+  
+  useEffect(() => {
+    if (isEditing) {
+      adjustTextareaHeight();
+    }
+  }, [isEditing]);
+
+  // Call adjustTextareaHeight whenever textarea content changes in edit mode
+  useEffect(() => {
+    if (isEditing) {
+      adjustTextareaHeight();
+    }
+  }, [editedNote.content]);
 
   
   return (
