@@ -4,6 +4,30 @@ import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 
 function Note(props) {
   
+  const contentRef = useRef(null);
+
+  function handleClick() {
+    props.onDelete(props.id);
+  }
+
+  function handleEditClick() {
+    setEditing(true);
+  }
+
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    setEditedNote(prevNote => ({
+      ...prevNote,
+      [name]: value
+    }));
+  }
+
+  function handleSaveClick() {
+    props.onEdit(props.id, editedNote);
+    setEditing(false);
+  }
+
+  
   return (
     <div ref = {noteRef}>
       {isEditing ? (

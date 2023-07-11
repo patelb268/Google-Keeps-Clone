@@ -69,6 +69,26 @@ async function addNote(newNote) {
   }
 }
 
+async function deleteNote(id) {
+  fetch(`http://localhost:8080/keeper/notes/${id}`, {
+    method: "DELETE",
+  })
+    .then((response) => {
+      if (!response.ok) {
+        handelerror(response);
+
+        return;
+      }
+      
+      setNotes((prevNotes) =>
+        prevNotes.filter((noteItem) => noteItem._id !== id)
+      );
+      handelSuccess("Note deleted successfully!");
+    }).catch((error) => {
+      console.error("Error deleting note:", error.message);
+    });
+}
+
 
   return (
     

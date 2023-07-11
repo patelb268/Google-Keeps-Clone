@@ -48,6 +48,33 @@ router.get('/notes', async (req, res) => {
   });
 
 
+//Delete by ID Method
+router.delete('/notes/:id', async (req, res) => {
+try {
+    
+    const client = getClient();
+    if(!client) handleInternalServerError(err, res);
+
+    const database = client.db("keeper");
+    const collection = database.collection("notes");
+    const id = req.params.id;
+    
+    // Use await to wait for the deleteOne operation to complete
+    const result = await collection.deleteOne({ _id: new ObjectId(id) });
+    if (result.deletedCount === 0) {
+        // If the deleteOne operation didn't find a matching document
+        handleNotFoundError(res);
+        return;
+    }
+
+    // Respond with a success message
+    res.status(200).json({ message: 'Deleted successfully' });
+    } catch (err) {
+        console.log(err);
+        handleBadRequestError(err,res) // Handle internal server error or bad request
+    }
+});
+  
   
   
   
