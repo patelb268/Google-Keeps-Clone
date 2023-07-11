@@ -52,7 +52,50 @@ function CreateArea(props) {
     }
   }
 
-
+  async function editNote(id, editedNote) {
+    try {
+      // Check if the edited note is the same as the existing note
+      const existingNote = notes.find(note => note._id === id);
+      if (
+        existingNote &&
+        existingNote.title === editedNote.title &&
+        existingNote.content === editedNote.content
+      ) {
+        return;
+      }
+  
+      const response = await fetch(`http://localhost:8080/keeper/notes/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(editedNote)
+      });
+  
+      if (!response.ok) {
+        handelerror(response);
+        return;
+      }
+  
+      const { data } = await response.json();
+      setNotes(prevNotes => {
+        const index = prevNotes.findIndex(note => note._id === id);
+        if (index !== -1) {
+          const updatedNotes = [...prevNotes];
+          updatedNotes[index] = {
+            ...updatedNotes[index],
+            title: editedNote.title,
+            content: editedNote.content
+          };
+          return updatedNotes;
+        }
+        return prevNotes;
+      });
+      handelSuccess("Note updated successfully!");
+    } catch (error) {
+      console.error("Error updating note:", error.message);
+    }
+  }
   
   return (
     <div>

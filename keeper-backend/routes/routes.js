@@ -74,6 +74,35 @@ try {
         handleBadRequestError(err,res) // Handle internal server error or bad request
     }
 });
+
+//Update by ID Method
+router.put('/notes/:id', async (req, res) => {
+    try{
+        const client = getClient();
+        if(!client) handleInternalServerError(err, res);
+        const database = client.db("keeper");
+        const collection = database.collection("notes");
+        const id = req.params.id;
+        const updatedNote = {
+            title: req.body.title,
+            content: req.body.content,
+        };
+        if (!updatedNote.title || !updatedNote.content) {
+            handleBadRequestError('err', res);
+            return;
+        }
+        const result = await collection.updateOne({ _id: new ObjectId(id) }, { $set: updatedNote });
+        if (result.modifiedCount === 0) {
+            handleNotFoundError(res);
+            return;
+        }
+        res.status(200).json({ message: 'Updated successfully' });
+    }
+    catch(err){
+        handleInternalServerError(err, res);
+    }
+});
+  
   
   
   
