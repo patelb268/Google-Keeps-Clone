@@ -3,7 +3,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 
 function Note(props) {
-  
   const noteRef = useRef();
   const [isEditing, setEditing] = useState(false);
   const [editedNote, setEditedNote] = useState({
@@ -56,7 +55,6 @@ function Note(props) {
     }
   }, [editedNote.content]);
 
-  
   return (
     <div ref = {noteRef}>
       {isEditing ? (

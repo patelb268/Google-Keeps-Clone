@@ -78,8 +78,8 @@ footer p {
 
 }
 .note .expanded-content {
-  max-height: none; 
-  overflow-y: visible;
+  max-height: none; /* Allow content to expand to its full height */
+  overflow-y: visible; /* Allow content to overflow vertically when expanded */
 }
 
 
