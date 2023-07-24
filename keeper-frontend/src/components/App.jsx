@@ -118,7 +118,6 @@ function App() {
         return;
       }
   
-      const { data } = await response.json();
       setNotes(prevNotes => {
         const index = prevNotes.findIndex(note => note._id === id);
         if (index !== -1) {
