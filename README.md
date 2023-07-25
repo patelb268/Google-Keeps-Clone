@@ -1,6 +1,6 @@
 # Google-Keeps-Clone
 
-https://github.com/patelb268/Google-Keeps-Clone/assets/109325051/7d0bdeef-dd3a-499f-8ec9-d15777b22873
+https://github-production-user-asset-6210df.s3.amazonaws.com/109325051/255935367-7d0bdeef-dd3a-499f-8ec9-d15777b22873.mp4
 
 <img width="924" alt="GKC" src="https://github.com/patelb268/Google-Keeps-Clone/assets/109325051/dec5f154-1847-4f04-ba28-65dff78ab285">
 
