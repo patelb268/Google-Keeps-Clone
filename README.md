@@ -93,5 +93,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 This project was inspired by Google Keep and serves as a learning exercise in building full-stack web applications.
 Thanks to the developers of React Toastify for their awesome library.
 
-## Contact
-If you have any questions or suggestions, feel free to reach out to the project maintainer at prayagbpatel@gmail.com
